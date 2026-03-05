@@ -455,7 +455,6 @@ Bingung mau kontribusi apa? Ini beberapa ide:
 ## 👥 Tim & Komunitas
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Made_with-❤️_di_Indonesia-FF0000?style=for-the-badge" /><br /><br />
   <strong>Kata-mamah-aku-calon-engineer</strong><br />
   <em>Komunitas developer muda Indonesia yang belajar ngoding<br />sambil bikin sesuatu yang bermanfaat untuk umat.</em>
 </p>
@@ -477,6 +476,34 @@ Bingung mau kontribusi apa? Ini beberapa ide:
 </a>
 
 <sub>Dibuat otomatis dengan [contrib.rocks](https://contrib.rocks)</sub>
+
+---
+
+## 💝 Donasi & Dukungan
+
+Proyek ini sepenuhnya **gratis dan open-source**. Jika kamu merasa terbantu, kamu bisa mendukung kami agar terus semangat mengembangkan RuangIbadah:
+
+<p align="center">
+  <a href="https://saweria.co/ruangibadah">
+    <img src="https://img.shields.io/badge/Saweria-Donasi-F96854?style=for-the-badge" />
+  </a>
+  &nbsp;
+  <a href="https://trakteer.id/ruangibadah">
+    <img src="https://img.shields.io/badge/Trakteer-Traktir_Kopi-C02433?style=for-the-badge" />
+  </a>
+</p>
+
+Atau bisa langsung transfer ke:
+
+| Metode | Detail |
+|--------|--------|
+| **QRIS** | Scan QR code di halaman Saweria |
+| **Dana** | Melalui link Saweria |
+| **GoPay** | Melalui link Saweria |
+| **OVO** | Melalui link Saweria |
+| **Bank Transfer** | Melalui link Trakteer |
+
+> 🤲 Donasi kamu akan digunakan untuk biaya server, domain, dan pengembangan fitur baru. Semoga menjadi amal jariyah.
 
 ---
 
