@@ -49,11 +49,11 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icons/icon-192.png" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col overflow-x-hidden`}
       >
         <Providers>
           <Navbar />
-          <main className="flex-1 flex flex-col w-full max-w-7xl mx-auto px-4 sm:px-6">
+          <main className="flex-1 flex flex-col w-full max-w-7xl mx-auto px-4 sm:px-6 overflow-x-hidden">
             {children}
           </main>
           <Footer />
