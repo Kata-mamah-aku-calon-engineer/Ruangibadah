@@ -1,11 +1,12 @@
-// RuangIbadah Service Worker v3
-// Caching strategies: Network-first for API, Stale-while-revalidate for pages
+// RuangIbadah Service Worker v4
+// Offline-first with explicit offline fallback page
 
-const CACHE_NAME = 'ruangibadah-v3';
-const OFFLINE_URL = '/';
+const CACHE_NAME = 'ruangibadah-v4';
+const OFFLINE_URL = '/offline.html';
 
 const STATIC_ASSETS = [
     '/',
+    '/offline.html',
     '/manifest.json',
     '/icons/icon-192.png',
     '/icons/icon-512.png',
@@ -18,10 +19,11 @@ self.addEventListener('message', (event) => {
     }
 });
 
-// Install — pre-cache static assets
+// Install — pre-cache static assets including offline page
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches.open(CACHE_NAME).then((cache) => {
+            console.log('[SW] Caching static assets');
             return cache.addAll(STATIC_ASSETS);
         })
     );
@@ -35,11 +37,13 @@ self.addEventListener('activate', (event) => {
             // Clean old caches
             const names = await caches.keys();
             await Promise.all(
-                names.filter((n) => n !== CACHE_NAME).map((n) => caches.delete(n))
+                names
+                    .filter((n) => n !== CACHE_NAME)
+                    .map((n) => caches.delete(n))
             );
 
             // Enable navigation preload if supported
-            if ('navigationPreload' in self.registration) {
+            if (self.registration.navigationPreload) {
                 await self.registration.navigationPreload.enable();
             }
         })()
@@ -47,38 +51,42 @@ self.addEventListener('activate', (event) => {
     self.clients.claim();
 });
 
-// Fetch handler
+// Fetch handler — offline-capable
 self.addEventListener('fetch', (event) => {
     const { request } = event;
 
-    // Skip non-GET requests
+    // Skip non-GET and non-http(s) requests
     if (request.method !== 'GET') return;
-
-    // Skip chrome-extension and non-http(s) requests
     if (!request.url.startsWith('http')) return;
 
-    // Navigation requests — network first with preload support
+    // Navigation requests — network first, offline fallback
     if (request.mode === 'navigate') {
         event.respondWith(
             (async () => {
                 try {
-                    // Try navigation preload response first
+                    // Try navigation preload first
                     const preloadResponse = await event.preloadResponse;
                     if (preloadResponse) {
                         return preloadResponse;
                     }
 
-                    // Then try network
+                    // Try network
                     const networkResponse = await fetch(request);
-                    // Cache the page for offline use
-                    const cache = await caches.open(CACHE_NAME);
-                    cache.put(request, networkResponse.clone());
+                    // Cache successful navigation for offline
+                    if (networkResponse.ok) {
+                        const cache = await caches.open(CACHE_NAME);
+                        cache.put(request, networkResponse.clone());
+                    }
                     return networkResponse;
                 } catch (error) {
-                    // Offline — serve from cache
+                    // Network failed — try cache first
                     const cache = await caches.open(CACHE_NAME);
                     const cachedResponse = await cache.match(request);
-                    return cachedResponse || cache.match(OFFLINE_URL);
+                    if (cachedResponse) {
+                        return cachedResponse;
+                    }
+                    // Last resort — serve offline page
+                    return cache.match(OFFLINE_URL);
                 }
             })()
         );
@@ -108,20 +116,30 @@ self.addEventListener('fetch', (event) => {
         return;
     }
 
-    // Static assets — stale while revalidate
+    // Static assets — cache first, network fallback
     event.respondWith(
         caches.match(request).then((cached) => {
-            const fetchPromise = fetch(request)
-                .then((response) => {
+            if (cached) {
+                // Return cached version, update in background
+                fetch(request).then((response) => {
                     if (response.ok) {
-                        const clone = response.clone();
-                        caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+                        caches.open(CACHE_NAME).then((cache) => cache.put(request, response));
                     }
-                    return response;
-                })
-                .catch(() => cached);
+                }).catch(() => { });
+                return cached;
+            }
 
-            return cached || fetchPromise;
+            // Not in cache — fetch from network and cache it
+            return fetch(request).then((response) => {
+                if (response.ok) {
+                    const clone = response.clone();
+                    caches.open(CACHE_NAME).then((cache) => cache.put(request, clone));
+                }
+                return response;
+            }).catch(() => {
+                // Return nothing if both cache and network fail
+                return new Response('', { status: 408, statusText: 'Offline' });
+            });
         })
     );
 });
@@ -160,13 +178,11 @@ self.addEventListener('notificationclick', (event) => {
 
     event.waitUntil(
         self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
-            // Focus existing window if available
             for (const client of clients) {
-                if (client.url.includes('ruangibadah') && 'focus' in client) {
+                if ('focus' in client) {
                     return client.focus();
                 }
             }
-            // Otherwise open new window
             return self.clients.openWindow('/');
         })
     );
