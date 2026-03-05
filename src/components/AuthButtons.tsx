@@ -58,8 +58,8 @@ export function AuthButtons() {
                             unoptimized
                         />
                     ) : (
-                        <div className="w-8 h-8 rounded-full bg-primary/10 text-primary flex items-center justify-center">
-                            <UserIcon size={16} />
+                        <div className="w-8 h-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">
+                            {user.user_metadata?.full_name?.charAt(0).toUpperCase() || user.email?.charAt(0).toUpperCase() || <UserIcon size={16} />}
                         </div>
                     )}
                     <span className="text-sm font-semibold hidden sm:inline text-foreground">

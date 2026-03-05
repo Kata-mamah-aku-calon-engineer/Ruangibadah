@@ -1,191 +1,269 @@
-# 🕌 RuangIbadah
+<p align="center">
+  <img src="public/icons/icon-512.png" width="120" alt="RuangIbadah Logo" />
+</p>
 
-**Platform utilitas ibadah harian berbasis web untuk Muslim modern.**
+<h1 align="center">🕌 RuangIbadah</h1>
 
-RuangIbadah adalah aplikasi web yang dirancang untuk membantu umat Muslim dalam menjalankan ibadah sehari-hari. Dibangun dengan teknologi modern, aplikasi ini menyediakan akses cepat ke berbagai fitur ibadah tanpa perlu menginstal aplikasi berat — cukup buka di browser.
+<p align="center">
+  <strong>Platform utilitas ibadah harian untuk Muslim modern.</strong><br />
+  Dibangun dengan ❤️ oleh komunitas <a href="https://github.com/Kata-mamah-aku-calon-engineer">Kata-mamah-aku-calon-engineer</a>
+</p>
 
-> 🎯 **Target Pengguna:** Anak muda, pelajar, mahasiswa, dan pekerja kantoran yang butuh akses cepat ke utilitas ibadah harian.
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-16-black?logo=next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-5-blue?logo=typescript" />
+  <img src="https://img.shields.io/badge/Supabase-Auth%20%2B%20DB-3ECF8E?logo=supabase" />
+  <img src="https://img.shields.io/badge/PWA-Installable-blueviolet?logo=pwa" />
+  <img src="https://img.shields.io/badge/License-MIT-green" />
+</p>
 
 ---
 
-## ✨ Fitur Utama
+## 📖 Tentang
 
-### 🏠 Beranda
-- Sapaan personal dengan nama pengguna
-- Tanggal Hijriah & Masehi
-- **Countdown waktu shalat** terdekat berdasarkan lokasi otomatis
-- Quick actions: Lanjut Baca Qur'an, Arah Kiblat, Kalkulator Zakat
-- Konten harian: ayat hari ini, doa, dan quotes islami
+**RuangIbadah** adalah aplikasi web progresif (PWA) yang menyediakan berbagai utilitas ibadah harian bagi umat Muslim. Mulai dari membaca Al-Qur'an, mengakses 38.000+ hadits shahih, menghitung arah kiblat, hingga tasbih digital — semuanya dalam satu platform yang ringan, cepat, dan bisa di-install langsung di HP.
 
-### 📖 Al-Qur'an
-- Daftar 114 Surah lengkap dengan navigasi per Juz
-- Tampilan bersih: teks Arab besar, transliterasi, dan terjemahan Bahasa Indonesia
-- Audio player murottal (floating player)
-- Bookmark per ayat tersimpan di database
+Proyek ini merupakan karya open-source dari komunitas **Kata-mamah-aku-calon-engineer** — sekelompok developer muda Indonesia yang belajar ngoding sambil bikin sesuatu yang bermanfaat untuk umat. 🚀
 
-### 🕐 Jadwal Sholat
-- Jadwal sholat 5 waktu berdasarkan lokasi pengguna
-- Data realtime dari [Aladhan API](https://aladhan.com/prayer-times-api)
+---
 
-### 🧭 Arah Kiblat
-- Penunjuk arah kiblat berdasarkan GPS / lokasi perangkat
+## ✨ Fitur Lengkap
 
-### 📚 Info Kajian
-- Jadwal kajian offline di area sekitar
-- Filter berdasarkan kota/lokasi
-
-### 🔐 Autentikasi
-- Login dengan akun Google via Supabase Auth
-- Profil pengguna tersimpan aman di database
+| # | Fitur | Deskripsi |
+|---|-------|-----------|
+| 1 | **Al-Qur'an Digital** | 114 surat lengkap dengan teks Arab, latin, terjemahan Indonesia, dan audio murottal. Bookmark & lanjut baca. |
+| 2 | **Kitab Hadits** | 38.000+ hadits dari 9 kitab utama (Bukhari, Muslim, Abu Daud, Tirmidzi, Nasai, Ibnu Majah, Ahmad, Malik, Darimi). Navigasi per halaman & pencarian nomor hadits. |
+| 3 | **Jadwal Sholat** | Waktu sholat akurat berdasarkan lokasi (API Aladhan, metode Kemenag RI). Hitung mundur menuju waktu sholat berikutnya. |
+| 4 | **Jam Digital Real-time** | Jam interaktif yang berdetak per detik, tampil di halaman utama bersama tanggal Hijriah & Masehi. |
+| 5 | **Kompas Kiblat** | Arah kiblat real-time menggunakan DeviceOrientation API (sensor gyroscope & magnetometer HP). Support iOS 13+. |
+| 6 | **Tasbih Digital** | Alat hitung dzikir interaktif dengan target 33/99/1000. Haptic feedback (HP bergetar setiap hitungan). |
+| 7 | **Kumpulan Doa** | 108 doa harian dari Al-Qur'an & Hadits lengkap dengan teks Arab, latin, dan terjemahan. Live search. |
+| 8 | **Kalkulator Zakat** | 4 jenis zakat: Penghasilan, Emas/Perak, Tabungan, Fitrah. Cek nisab otomatis. |
+| 9 | **Peta Masjid Terdekat** | Peta interaktif (Leaflet.js + OpenStreetMap) untuk menemukan masjid di sekitar. Radius 1-10 km. Link petunjuk arah Google Maps. |
+| 10 | **Artikel & Kajian** | Artikel islami terbaru otomatis dari sumber terpercaya Indonesia: muslim.or.id, rumaysho.com, konsultasisyariah.com. Diperbarui setiap jam. |
+| 11 | **PWA Support** | Bisa di-install langsung ke layar HP seperti aplikasi native. Offline support dengan Service Worker. |
 
 ---
 
 ## 🛠️ Tech Stack
 
 | Layer | Teknologi |
-|---|---|
-| **Framework** | [Next.js 16](https://nextjs.org/) (App Router) |
-| **Bahasa** | TypeScript |
+|-------|-----------|
+| **Framework** | [Next.js 16](https://nextjs.org/) (App Router, Turbopack) |
+| **Bahasa** | [TypeScript 5](https://www.typescriptlang.org/) |
 | **UI Library** | [HeroUI](https://heroui.com/) (Beta) |
 | **Styling** | [Tailwind CSS 4](https://tailwindcss.com/) |
 | **Animasi** | [Framer Motion](https://www.framer.com/motion/) |
 | **Ikon** | [Lucide React](https://lucide.dev/) |
-| **Backend & Auth** | [Supabase](https://supabase.com/) (PostgreSQL + Auth) |
-| **Tema** | [next-themes](https://github.com/pacocoursey/next-themes) (Dark/Light mode) |
+| **Auth & DB** | [Supabase](https://supabase.com/) (Google OAuth + PostgreSQL) |
+| **Peta** | [Leaflet.js](https://leafletjs.com/) + [OpenStreetMap](https://www.openstreetmap.org/) |
+| **PWA** | Custom Service Worker + Web App Manifest |
+
+---
+
+## 🌐 API & Sumber Data
+
+| Data | Sumber | Tipe |
+|------|--------|------|
+| Al-Qur'an | [equran.id](https://equran.id/) | REST API |
+| Hadits | [api.hadith.gading.dev](https://api.hadith.gading.dev/) | REST API (Live) |
+| Doa Harian | [api.myquran.com](https://api.myquran.com/) | JSON (Offline) |
+| Jadwal Sholat | [Aladhan API](https://aladhan.com/prayer-times-api) | REST API |
+| Arah Kiblat | [Aladhan API](https://aladhan.com/prayer-times-api) | REST API |
+| Masjid Terdekat | [Overpass API](https://overpass-api.de/) (OpenStreetMap) | REST API (Fallback) |
+| Artikel Kajian | muslim.or.id, rumaysho.com, konsultasisyariah.com | RSS Feed |
+
+---
+
+## 🗃️ Database Schema (Supabase)
+
+```sql
+-- Profil pengguna
+CREATE TABLE user_profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id),
+  display_name TEXT,
+  avatar_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Bookmark Al-Qur'an
+CREATE TABLE bookmarks (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES auth.users(id) NOT NULL,
+  surah_number INT NOT NULL,
+  ayah_number INT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE(user_id, surah_number, ayah_number)
+);
+
+-- Row Level Security
+ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE bookmarks ENABLE ROW LEVEL SECURITY;
+```
+
+---
+
+## 🚀 Cara Setup & Menjalankan
+
+### Prasyarat
+
+- [Node.js](https://nodejs.org/) v18+
+- [npm](https://www.npmjs.com/) atau [pnpm](https://pnpm.io/)
+- Akun [Supabase](https://supabase.com/) (gratis)
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/Kata-mamah-aku-calon-engineer/Ruangibadah.git
+cd Ruangibadah
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Setup Supabase
+
+1. Buat project baru di [Supabase Dashboard](https://app.supabase.com/)
+2. Jalankan SQL dari `schema.sql` di SQL Editor Supabase
+3. Aktifkan Google OAuth di **Authentication > Providers > Google**
+4. Tambahkan redirect URL: `http://localhost:3000/auth/callback`
+
+### 4. Konfigurasi Environment
+
+Buat file `.env.local`:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
+```
+
+### 5. Jalankan Development Server
+
+```bash
+npm run dev
+```
+
+Buka [http://localhost:3000](http://localhost:3000) di browser. 🎉
+
+---
+
+## 📱 Install sebagai Aplikasi (PWA)
+
+RuangIbadah bisa di-install langsung ke HP tanpa melalui Play Store:
+
+1. Buka website RuangIbadah di **Chrome** (Android) atau **Safari** (iOS)
+2. Klik menu ⋮ → **"Tambahkan ke Layar Utama"**
+3. Aplikasi akan muncul di app drawer seperti aplikasi native!
+
+### Ingin file .apk?
+
+1. Deploy ke Vercel/Netlify terlebih dahulu
+2. Buka [PWABuilder.com](https://www.pwabuilder.com/)
+3. Masukkan URL deployment
+4. Download file `.apk` yang dihasilkan
 
 ---
 
 ## 📁 Struktur Proyek
 
 ```
-muslim/
-├── public/                 # Aset statis (ikon, gambar)
+Ruangibadah/
+├── public/
+│   ├── icons/            # PWA icons (192x192 & 512x512)
+│   ├── manifest.json     # Web App Manifest
+│   └── sw.js             # Service Worker
 ├── src/
 │   ├── app/
-│   │   ├── auth/           # Halaman & logika autentikasi
-│   │   ├── jadwal-sholat/  # Halaman jadwal sholat
-│   │   ├── kajian/         # Halaman info kajian
-│   │   ├── kiblat/         # Halaman arah kiblat
-│   │   ├── quran/          # Halaman Al-Qur'an & detail surah
-│   │   ├── layout.tsx      # Root layout
-│   │   ├── page.tsx        # Halaman beranda
-│   │   ├── providers.tsx   # Context providers (tema, dll)
-│   │   └── globals.css     # Style global
+│   │   ├── page.tsx          # Beranda + Quick Actions
+│   │   ├── quran/            # Al-Qur'an digital
+│   │   ├── hadith/           # Kitab Hadits (9 kitab)
+│   │   ├── jadwal-sholat/    # Jadwal sholat
+│   │   ├── kiblat/           # Kompas kiblat
+│   │   ├── tasbih/           # Tasbih digital
+│   │   ├── doa/              # Kumpulan doa
+│   │   ├── zakat/            # Kalkulator zakat
+│   │   ├── masjid/           # Masjid terdekat
+│   │   └── kajian/           # Artikel & info kajian
 │   ├── components/
-│   │   ├── AudioPlayer.tsx     # Player murottal
-│   │   ├── AuthButtons.tsx     # Tombol login/logout
-│   │   ├── BookmarkButton.tsx  # Tombol bookmark ayat
-│   │   ├── PrayerCountdown.tsx # Countdown shalat
-│   │   ├── navbar.tsx          # Navigasi utama
-│   │   └── footer.tsx          # Footer
-│   └── utils/              # Utilitas & helper (Supabase client, dll)
-├── schema.sql              # Skema database PostgreSQL
-├── konsepdasar.md          # Dokumen konsep & perencanaan
-├── .env.local              # Environment variables (Supabase keys)
+│   │   ├── navbar.tsx        # Navigasi responsif
+│   │   ├── footer.tsx        # Footer
+│   │   ├── PrayerCountdown.tsx  # Hitung mundur sholat + jam
+│   │   ├── AuthButtons.tsx   # Login/logout Google
+│   │   ├── MasjidMap.tsx     # Komponen peta Leaflet
+│   │   └── ServiceWorkerRegister.tsx
+│   ├── data/
+│   │   └── doa.json          # 108 doa (offline-ready)
+│   └── utils/
+│       └── supabase/         # Supabase client & server helpers
+├── schema.sql                # Database schema
+├── .env.local                # Environment variables (JANGAN di-commit!)
 ├── package.json
 ├── tsconfig.json
-└── next.config.ts
+└── README.md
 ```
-
----
-
-## 🗄️ Skema Database
-
-Menggunakan **PostgreSQL** via Supabase dengan Row Level Security (RLS):
-
-| Tabel | Deskripsi |
-|---|---|
-| `auth.users` | Tabel bawaan Supabase Auth (id, email, created_at) |
-| `user_profiles` | Data tambahan user (nama, lokasi, avatar) |
-| `bookmarks` | Riwayat bookmark ayat Al-Qur'an per user |
-
-> Semua tabel dilindungi dengan **Row Level Security** — user hanya bisa akses data milik sendiri.
-
----
-
-## 🚀 Getting Started
-
-### Prasyarat
-
-- [Node.js](https://nodejs.org/) v18+
-- Akun [Supabase](https://supabase.com/) (gratis)
-
-### Instalasi
-
-1. **Clone repository**
-   ```bash
-   git clone <repository-url>
-   cd muslim
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Setup environment variables**
-
-   Buat file `.env.local` di root project:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-   ```
-
-4. **Setup database**
-
-   Jalankan `schema.sql` di Supabase SQL Editor untuk membuat tabel yang dibutuhkan.
-
-5. **Jalankan development server**
-   ```bash
-   npm run dev
-   ```
-
-6. Buka [http://localhost:3000](http://localhost:3000) di browser.
-
----
-
-## 📜 Scripts
-
-| Command | Deskripsi |
-|---|---|
-| `npm run dev` | Jalankan dev server |
-| `npm run build` | Build untuk production |
-| `npm run start` | Jalankan production server |
-| `npm run lint` | Cek linting dengan ESLint |
 
 ---
 
 ## 🗺️ Roadmap
 
-- [x] Setup Next.js + Tailwind CSS + HeroUI
-- [x] Halaman beranda dengan countdown shalat
-- [x] Integrasi API Al-Qur'an & jadwal sholat
-- [x] Halaman pembacaan Al-Qur'an
-- [x] Integrasi Supabase Auth (Google Login)
-- [x] Fitur bookmark ayat
-- [ ] Halaman arah kiblat (compass)
-- [ ] Kalkulator zakat
-- [ ] Peta masjid terdekat (Leaflet.js / Google Maps)
-- [ ] Board jadwal kajian dengan filter lokasi
-- [ ] PWA support (installable di HP)
+- [x] Al-Qur'an digital (114 surat + bookmark)
+- [x] Jadwal sholat (Aladhan API)
+- [x] Kompas kiblat (DeviceOrientation)
+- [x] Kalkulator zakat (4 jenis)
+- [x] Peta masjid terdekat (Leaflet + Overpass)
+- [x] Tasbih digital (haptic feedback)
+- [x] Kumpulan doa (108 doa)
+- [x] Kitab hadits (38.000+ dari 9 kitab)
+- [x] Artikel & kajian (RSS feed otomatis)
+- [x] Jam digital real-time
+- [x] PWA support (installable)
+- [x] Login Google (Supabase Auth)
+- [ ] Dark/Light mode toggle
+- [ ] Notifikasi waktu sholat (Push Notification)
+- [ ] Audio murottal streaming
+- [ ] Halaman profil pengguna
+- [ ] Multi-bahasa (EN/AR)
 
 ---
 
-## 🏗️ Deployment
+## 🤝 Kontribusi
 
-Aplikasi ini dirancang untuk di-deploy menggunakan:
+Kami sangat terbuka untuk kontribusi! Ini adalah proyek komunitas — siapa saja boleh ikut berkontribusi.
 
-- **[Vercel](https://vercel.com/)** — Platform deployment optimal untuk Next.js
-- **Self-hosted** — Containerisasi menggunakan LXC di Proxmox dengan Nginx reverse proxy + Cloudflare
+1. Fork repository ini
+2. Buat branch fitur (`git checkout -b fitur/tambah-xyz`)
+3. Commit perubahan (`git commit -m 'Menambahkan fitur xyz'`)
+4. Push ke branch (`git push origin fitur/tambah-xyz`)
+5. Buat Pull Request
+
+---
+
+## 👥 Tim & Komunitas
+
+<p align="center">
+  <strong>Kata-mamah-aku-calon-engineer</strong><br />
+  <em>Komunitas developer muda Indonesia yang belajar ngoding sambil bikin sesuatu yang bermanfaat.</em>
+</p>
+
+<p align="center">
+  <a href="https://github.com/Kata-mamah-aku-calon-engineer">
+    <img src="https://img.shields.io/badge/GitHub-Kata--mamah--aku--calon--engineer-181717?logo=github" />
+  </a>
+</p>
 
 ---
 
 ## 📄 Lisensi
 
-Proyek ini bersifat privat dan dikembangkan untuk kebutuhan internal.
+Proyek ini dilisensikan di bawah [MIT License](LICENSE).
 
 ---
 
 <p align="center">
-  Dibuat dengan ❤️ untuk kemudahan ibadah umat Muslim
+  <strong>بِسْمِ اللَّهِ الرَّحْمَـٰنِ الرَّحِيمِ</strong><br />
+  <em>Dengan menyebut nama Allah Yang Maha Pengasih lagi Maha Penyayang.</em><br /><br />
+  Semoga proyek ini menjadi amal jariyah bagi seluruh kontributor. 🤲
 </p>

@@ -16,6 +16,16 @@ export function PrayerCountdown() {
     const [nextPrayer, setNextPrayer] = useState<{ name: string; time: string } | null>(null);
     const [difference, setDifference] = useState<{ hours: number; minutes: number } | null>(null);
     const [dateInfo, setDateInfo] = useState({ hijri: "", masehi: "" });
+    const [currentTime, setCurrentTime] = useState("");
+
+    // Update real-time clock
+    useEffect(() => {
+        const timer = setInterval(() => {
+            const now = new Date();
+            setCurrentTime(now.toLocaleTimeString("id-ID", { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+        }, 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     useEffect(() => {
         async function fetchTimings() {
@@ -86,9 +96,14 @@ export function PrayerCountdown() {
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-foreground">
                 Assalamu'alaikum, <span className="text-primary">Fulan!</span>
             </h1>
-            <p className="text-lg text-default-500 max-w-2xl capitalize">
-                {dateInfo.hijri ? `${dateInfo.hijri} • ${dateInfo.masehi}` : "Memuat tanggal..."}
-            </p>
+            <div className="flex flex-col items-center gap-1">
+                <p className="text-2xl sm:text-3xl font-bold font-mono tracking-widest text-primary mt-2">
+                    {currentTime}
+                </p>
+                <p className="text-sm sm:text-base text-default-500 max-w-2xl capitalize">
+                    {dateInfo.hijri ? `${dateInfo.hijri} • ${dateInfo.masehi}` : "Memuat tanggal..."}
+                </p>
+            </div>
 
             <div className="mt-8 relative bg-gradient-to-r from-primary to-teal-500 p-8 rounded-3xl w-full max-w-4xl text-white shadow-xl shadow-primary/20 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-20"></div>
