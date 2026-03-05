@@ -1,71 +1,42 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import {
-    BookOpen, Menu, X, Sun, Moon, BookText, Clock, Compass,
+    BookOpen, Menu, X, BookText, Clock, Compass,
     Hand, BookHeart, Calculator, MapPinned, Newspaper, BookMarked,
     ChevronDown, User
 } from "lucide-react";
 import { AuthButtons } from "@/components/AuthButtons";
-import { LanguageSelector, useI18n } from "@/utils/i18n";
 
-function getLinks(t: (key: string) => string) {
-    const primary = [
-        { href: "/quran", label: t("nav.quran"), icon: <BookOpen size={16} /> },
-        { href: "/hadith", label: t("nav.hadith"), icon: <BookMarked size={16} /> },
-        { href: "/jadwal-sholat", label: t("nav.schedule"), icon: <Clock size={16} /> },
-        { href: "/kiblat", label: t("nav.qibla"), icon: <Compass size={16} /> },
-    ];
+const PRIMARY_LINKS = [
+    { href: "/quran", label: "Al-Qur'an", icon: <BookOpen size={16} /> },
+    { href: "/hadith", label: "Hadits", icon: <BookMarked size={16} /> },
+    { href: "/jadwal-sholat", label: "Jadwal Sholat", icon: <Clock size={16} /> },
+    { href: "/kiblat", label: "Arah Kiblat", icon: <Compass size={16} /> },
+];
 
-    const more = [
-        { href: "/tasbih", label: t("nav.tasbih"), icon: <Hand size={18} /> },
-        { href: "/doa", label: t("nav.doa"), icon: <BookHeart size={18} /> },
-        { href: "/zakat", label: t("nav.zakat"), icon: <Calculator size={18} /> },
-        { href: "/masjid", label: t("nav.mosque"), icon: <MapPinned size={18} /> },
-        { href: "/kajian", label: t("nav.kajian"), icon: <Newspaper size={18} /> },
-        { href: "/profil", label: t("nav.profile"), icon: <User size={18} /> },
-    ];
+const MORE_LINKS = [
+    { href: "/tasbih", label: "Tasbih", icon: <Hand size={18} /> },
+    { href: "/doa", label: "Doa Harian", icon: <BookHeart size={18} /> },
+    { href: "/zakat", label: "Zakat", icon: <Calculator size={18} /> },
+    { href: "/masjid", label: "Masjid", icon: <MapPinned size={18} /> },
+    { href: "/kajian", label: "Kajian", icon: <Newspaper size={18} /> },
+    { href: "/profil", label: "Profil", icon: <User size={18} /> },
+];
 
-    const all = [
-        { href: "/", label: t("nav.home"), icon: <BookOpen size={18} /> },
-        { href: "/quran", label: t("nav.quran"), icon: <BookText size={18} /> },
-        { href: "/hadith", label: t("nav.hadith"), icon: <BookMarked size={18} /> },
-        { href: "/jadwal-sholat", label: t("nav.schedule"), icon: <Clock size={18} /> },
-        { href: "/kiblat", label: t("nav.qibla"), icon: <Compass size={18} /> },
-        ...more,
-    ];
-
-    return { primary, more, all };
-}
-
-function ThemeToggle() {
-    const [mounted, setMounted] = useState(false);
-    const { theme, setTheme } = useTheme();
-
-    useEffect(() => setMounted(true), []);
-
-    if (!mounted) {
-        return <div className="w-9 h-9" />; // placeholder to prevent layout shift
-    }
-
-    return (
-        <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="p-2 rounded-lg hover:bg-default-100 transition-colors text-default-500 hover:text-foreground"
-            aria-label="Toggle theme"
-        >
-            {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
-        </button>
-    );
-}
+const ALL_LINKS = [
+    { href: "/", label: "Beranda", icon: <BookOpen size={18} /> },
+    { href: "/quran", label: "Al-Qur'an", icon: <BookText size={18} /> },
+    { href: "/hadith", label: "Hadits", icon: <BookMarked size={18} /> },
+    { href: "/jadwal-sholat", label: "Jadwal Sholat", icon: <Clock size={18} /> },
+    { href: "/kiblat", label: "Arah Kiblat", icon: <Compass size={18} /> },
+    ...MORE_LINKS,
+];
 
 export function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [showMore, setShowMore] = useState(false);
-    const { t } = useI18n();
-    const { primary: PRIMARY_LINKS, more: MORE_LINKS, all: ALL_LINKS } = getLinks(t);
 
     return (
         <nav className="w-full sticky top-0 z-50 bg-background/70 backdrop-blur-lg border-b border-divider">
@@ -97,7 +68,7 @@ export function Navbar() {
                             onClick={() => setShowMore(!showMore)}
                             className="px-3 py-2 rounded-lg hover:text-primary hover:bg-primary/5 transition-all flex items-center gap-1"
                         >
-                            {t("nav.more")}
+                            Lainnya
                             <ChevronDown size={14} className={`transition-transform ${showMore ? "rotate-180" : ""}`} />
                         </button>
 
@@ -123,14 +94,6 @@ export function Navbar() {
                 </div>
 
                 <div className="flex items-center gap-1 sm:gap-2">
-                    {/* Language selector */}
-                    <div className="hidden sm:block">
-                        <LanguageSelector />
-                    </div>
-
-                    {/* Dark/Light toggle */}
-                    <ThemeToggle />
-
                     <AuthButtons />
 
                     {/* Mobile hamburger */}

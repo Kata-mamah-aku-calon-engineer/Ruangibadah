@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { BookOpen, Compass, Calculator, MapPinned, Hand, BookHeart, BookMarked } from "lucide-react";
-import { useI18n } from "@/utils/i18n";
 
 interface QuickActionsProps {
     lastRead: {
@@ -13,56 +12,54 @@ interface QuickActionsProps {
 }
 
 export function QuickActions({ lastRead }: QuickActionsProps) {
-    const { t } = useI18n();
-
     const quickActions = [
         {
             href: lastRead ? `/quran/${lastRead.surahNumber}#ayah-${lastRead.ayahNumber}` : "/quran",
             icon: <BookOpen size={28} />,
             color: "primary",
-            title: "Lanjut Baca", // Not translated for now as it contains dynamic text, or we can translate it
+            title: "Lanjut Baca",
             desc: lastRead ? `${lastRead.surahName} Ayat ${lastRead.ayahNumber}` : "Mulai Membaca",
         },
         {
             href: "/kiblat",
             icon: <Compass size={28} />,
             color: "success",
-            title: t("nav.qibla"),
+            title: "Arah Kiblat",
             desc: "Kompas real-time",
         },
         {
             href: "/zakat",
             icon: <Calculator size={28} />,
             color: "warning",
-            title: t("nav.zakat"),
+            title: "Kalkulator Zakat",
             desc: "Hitung zakat Anda",
         },
         {
             href: "/masjid",
             icon: <MapPinned size={28} />,
             color: "secondary",
-            title: t("nav.mosque"),
+            title: "Masjid Terdekat",
             desc: "Cari di sekitar Anda",
         },
         {
             href: "/tasbih",
             icon: <Hand size={28} />,
             color: "default",
-            title: t("nav.tasbih"),
+            title: "Tasbih Digital",
             desc: "Hitung otomatis",
         },
         {
             href: "/hadith",
             icon: <BookMarked size={28} />,
             color: "danger",
-            title: t("nav.hadith"),
+            title: "Kitab Hadits",
             desc: "38.000+ hadits shahih",
         },
         {
             href: "/doa",
             icon: <BookHeart size={28} />,
             color: "default",
-            title: t("nav.doa"),
+            title: "Doa Harian",
             desc: "108 kumpulan doa",
         },
     ];

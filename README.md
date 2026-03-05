@@ -41,12 +41,10 @@ Proyek ini merupakan karya open-source dari komunitas **Kata-mamah-aku-calon-eng
 | 8 | **Kalkulator Zakat** | 4 jenis zakat: Penghasilan, Emas/Perak, Tabungan, Fitrah. Cek nisab otomatis. |
 | 9 | **Peta Masjid Terdekat** | Peta interaktif (Leaflet.js + OpenStreetMap) untuk menemukan masjid di sekitar. Radius 1-10 km. |
 | 10 | **Artikel & Kajian** | Artikel islami terbaru otomatis dari sumber terpercaya Indonesia: muslim.or.id, rumaysho.com, konsultasisyariah.com. |
-| 11 | **Dark/Light Mode** | Toggle tema gelap/terang dengan ikon Sun/Moon di navbar. Mengikuti preferensi sistem secara default. |
-| 12 | **Notifikasi Sholat** | Push Notification untuk pengingat waktu sholat. Menggunakan Notification API browser. |
-| 13 | **Audio Murottal** | Streaming audio murottal dari Misyari Rasyid Al-Afasi, tersedia di setiap halaman surah. |
-| 14 | **Halaman Profil** | Halaman profil pengguna dengan info akun, terakhir dibaca, dan opsi logout. |
-| 15 | **Multi-bahasa** | Dukungan tiga bahasa: Indonesia 🇮🇩, English 🇬🇧, dan العربية 🇸🇦. Toggle via flag selector. |
-| 16 | **PWA Support** | Bisa di-install langsung ke layar HP seperti aplikasi native. Offline support dengan Service Worker. |
+| 11 | **Notifikasi Sholat** | Push Notification untuk pengingat waktu sholat. Menggunakan Notification API browser. |
+| 12 | **Audio Murottal** | Streaming audio murottal dari Misyari Rasyid Al-Afasi, tersedia di setiap halaman surah. |
+| 13 | **Halaman Profil** | Halaman profil pengguna dengan info akun, terakhir dibaca, dan opsi logout. |
+| 14 | **PWA Support** | Bisa di-install langsung ke layar HP seperti aplikasi native. Offline support dengan Service Worker. |
 
 ---
 
@@ -62,7 +60,6 @@ Proyek ini merupakan karya open-source dari komunitas **Kata-mamah-aku-calon-eng
 | **Ikon** | [Lucide React](https://lucide.dev/) |
 | **Auth & DB** | [Supabase](https://supabase.com/) (Google OAuth + PostgreSQL) |
 | **Peta** | [Leaflet.js](https://leafletjs.com/) + [OpenStreetMap](https://www.openstreetmap.org/) |
-| **Tema** | [next-themes](https://github.com/pacocoursey/next-themes) |
 | **PWA** | Custom Service Worker + Web App Manifest |
 
 ---
@@ -170,7 +167,6 @@ Ruangibadah/
 │   ├── data/
 │   │   └── doa.json          # 108 doa (offline-ready)
 │   └── utils/
-│       ├── i18n.tsx          # Multi-bahasa (ID/EN/AR)
 │       └── supabase/         # Supabase helpers
 ├── schema.sql
 ├── .env.local
@@ -193,11 +189,10 @@ Ruangibadah/
 - [x] Jam digital real-time
 - [x] PWA support (installable + offline)
 - [x] Login Google (Supabase Auth)
-- [x] Dark/Light mode toggle
+- [x] Dark mode (tema gelap permanen)
 - [x] Notifikasi waktu sholat (Push Notification)
 - [x] Audio murottal streaming
 - [x] Halaman profil pengguna
-- [x] Multi-bahasa (ID/EN/AR)
 - [x] Swipe navigasi antar surah
 
 ---

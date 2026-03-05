@@ -80,7 +80,7 @@ export function AuthButtons() {
     return (
         <button
             onClick={handleLogin}
-            className="px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition-opacity font-semibold text-sm shadow-md"
+            className="px-4 py-2 rounded-md bg-primary text-white hover:bg-primary/90 transition-colors font-semibold text-sm shadow-md shadow-primary/20"
         >
             Login
         </button>

@@ -1,23 +1,22 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useI18n } from "@/utils/i18n";
 
 const PRAYERS = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+const INDO_PRAYERS: Record<string, string> = {
+    Fajr: "Subuh",
+    Dhuhr: "Dzuhur",
+    Asr: "Ashar",
+    Maghrib: "Maghrib",
+    Isha: "Isya"
+};
 
 export function PrayerCountdown() {
-    const { t, lang } = useI18n();
     const [timings, setTimings] = useState<Record<string, string> | null>(null);
     const [nextPrayer, setNextPrayer] = useState<{ name: string; time: string } | null>(null);
     const [difference, setDifference] = useState<{ hours: number; minutes: number } | null>(null);
     const [dateInfo, setDateInfo] = useState({ hijri: "", masehi: "" });
     const [currentTime, setCurrentTime] = useState("");
-
-    const greetings = {
-        id: "Assalamu'alaikum",
-        en: "Peace be upon you",
-        ar: "السلام عليكم"
-    };
 
     // Update real-time clock
     useEffect(() => {
@@ -88,14 +87,14 @@ export function PrayerCountdown() {
         }
 
         calculateNextPrayer();
-        const interval = setInterval(calculateNextPrayer, 60000); // update every minute
+        const interval = setInterval(calculateNextPrayer, 60000);
         return () => clearInterval(interval);
     }, [timings]);
 
     return (
         <section className="flex flex-col items-center justify-center text-center gap-4 animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="text-4xl sm:text-6xl font-black tracking-tight text-foreground">
-                {greetings[lang]}, <span className="text-primary">Fulan!</span>
+                Assalamu&apos;alaikum, <span className="text-primary">Fulan!</span>
             </h1>
             <div className="flex flex-col items-center gap-1">
                 <p className="text-2xl sm:text-3xl font-bold font-mono tracking-widest text-primary mt-2">
@@ -106,12 +105,12 @@ export function PrayerCountdown() {
                 </p>
             </div>
 
-            <div className="mt-8 relative bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-3xl w-full max-w-4xl text-white shadow-xl overflow-hidden">
+            <div className="mt-8 relative bg-gradient-to-br from-primary/90 to-teal-600 p-8 rounded-3xl w-full max-w-4xl text-white shadow-xl shadow-primary/20 overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10"></div>
                 <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div className="text-left">
                         <p className="text-white/80 font-medium tracking-wider uppercase text-sm">
-                            {nextPrayer ? `${t("common.next")}: ${t(`prayer.${nextPrayer.name.toLowerCase()}`)}` : t("common.loading")}
+                            {nextPrayer ? `Menuju ${INDO_PRAYERS[nextPrayer.name]}` : "Memuat jadwal..."}
                         </p>
                         <h2 className="text-5xl font-bold mt-1">{nextPrayer ? nextPrayer.time : "--:--"}</h2>
                         <p className="mt-2 text-white/90">
@@ -122,8 +121,8 @@ export function PrayerCountdown() {
                     </div>
                     <div className="text-right flex items-center justify-center">
                         <div className="h-32 w-32 rounded-full border-4 border-white/20 flex items-center justify-center bg-white/10 backdrop-blur-sm">
-                            <div className="text-xl sm:text-3xl font-bold capitalize text-center px-2">
-                                {nextPrayer ? t(`prayer.${nextPrayer.name.toLowerCase()}`) : ""}
+                            <div className="text-3xl font-bold capitalize">
+                                {nextPrayer ? INDO_PRAYERS[nextPrayer.name] : ""}
                             </div>
                         </div>
                     </div>
