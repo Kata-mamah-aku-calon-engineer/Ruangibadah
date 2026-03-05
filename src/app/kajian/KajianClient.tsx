@@ -48,7 +48,7 @@ export function KajianClient({ articles }: { articles: RssItem[] }) {
     };
 
     return (
-        <div className="py-6 sm:py-10 flex flex-col gap-5 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-5xl mx-auto">
+        <div className="py-6 sm:py-10 flex flex-col gap-5 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-5xl mx-auto w-full overflow-hidden">
             <div className="text-center space-y-2 sm:space-y-4">
                 <h1 className="text-3xl sm:text-4xl font-black text-foreground">Artikel & Info Kajian</h1>
                 <p className="text-default-500 max-w-2xl mx-auto text-sm sm:text-base">
@@ -117,7 +117,7 @@ export function KajianClient({ articles }: { articles: RssItem[] }) {
                             href={article.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="group flex flex-col bg-background rounded-2xl border border-divider shadow-sm overflow-hidden hover:shadow-md transition-all hover:border-primary/50"
+                            className="group flex flex-col bg-background rounded-2xl border border-divider shadow-sm overflow-hidden hover:shadow-md transition-all hover:border-primary/50 min-w-0"
                         >
                             {article.thumbnail && (
                                 <div className="h-40 sm:h-48 overflow-hidden relative">
@@ -133,11 +133,11 @@ export function KajianClient({ articles }: { articles: RssItem[] }) {
                                 </div>
                             )}
 
-                            <div className="p-4 sm:p-5 flex flex-col flex-1">
-                                <h2 className="text-base sm:text-lg font-bold group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                            <div className="p-4 sm:p-5 flex flex-col flex-1 min-w-0">
+                                <h2 className="text-base sm:text-lg font-bold group-hover:text-primary transition-colors leading-snug line-clamp-2 break-words">
                                     {article.title}
                                 </h2>
-                                <p className="text-default-500 text-xs sm:text-sm mt-2 line-clamp-3 flex-1">
+                                <p className="text-default-500 text-xs sm:text-sm mt-2 line-clamp-3 flex-1 break-words">
                                     {article.description}
                                 </p>
 

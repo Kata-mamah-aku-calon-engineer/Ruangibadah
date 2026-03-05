@@ -2,3 +2,18 @@
 @import "@heroui/styles";
 
 @source "../../node_modules/@heroui/styles";
+
+html,
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
