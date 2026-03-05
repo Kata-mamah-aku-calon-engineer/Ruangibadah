@@ -76,7 +76,7 @@ export default function ZakatPage() {
     const result = calculate();
 
     return (
-        <div className="py-6 sm:py-10 flex flex-col gap-6 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-3xl mx-auto w-full px-4">
+        <div className="py-6 sm:py-10 flex flex-col gap-5 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-3xl mx-auto w-full">
             <div className="text-center space-y-2 sm:space-y-4">
                 <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold">
                     <Calculator size={16} />
@@ -95,8 +95,8 @@ export default function ZakatPage() {
                         key={t.id}
                         onClick={() => setTab(t.id)}
                         className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold whitespace-nowrap transition-all shrink-0 ${tab === t.id
-                                ? "bg-primary text-white shadow-lg shadow-primary/25"
-                                : "bg-default-100 text-default-600 hover:bg-default-200"
+                            ? "bg-primary text-white shadow-lg shadow-primary/25"
+                            : "bg-default-100 text-default-600 hover:bg-default-200"
                             }`}
                     >
                         {t.icon}

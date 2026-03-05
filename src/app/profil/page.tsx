@@ -43,7 +43,7 @@ export default async function ProfilPage() {
     const initial = displayName.charAt(0).toUpperCase();
 
     return (
-        <div className="py-6 sm:py-10 flex flex-col gap-6 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-2xl mx-auto w-full px-4">
+        <div className="py-6 sm:py-10 flex flex-col gap-5 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-2xl mx-auto w-full">
             <div className="text-center space-y-2">
                 <h1 className="text-3xl sm:text-4xl font-black text-foreground">Profil Saya</h1>
             </div>

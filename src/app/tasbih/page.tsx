@@ -27,7 +27,7 @@ export default function TasbihPage() {
     };
 
     return (
-        <div className="py-6 sm:py-10 flex flex-col items-center justify-center min-h-[70vh] gap-6 sm:gap-8 animate-in fade-in zoom-in-95 duration-1000 px-4">
+        <div className="py-6 sm:py-10 flex flex-col items-center justify-center min-h-[70vh] gap-5 sm:gap-8 animate-in fade-in zoom-in-95 duration-1000">
             <div className="text-center space-y-2">
                 <h1 className="text-3xl sm:text-4xl font-black text-foreground">Tasbih Digital</h1>
                 <p className="text-default-500 text-sm sm:text-base">Target sentuhan: {target}x</p>

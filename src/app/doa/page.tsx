@@ -31,7 +31,7 @@ export default function DoaPage() {
     const paginatedDoa = filteredDoa.slice(0, page * PER_PAGE);
 
     return (
-        <div className="py-6 sm:py-10 flex flex-col gap-6 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 w-full px-4 max-w-4xl mx-auto">
+        <div className="py-6 sm:py-10 flex flex-col gap-5 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 w-full max-w-4xl mx-auto">
             <div className="text-center space-y-2 sm:space-y-4">
                 <h1 className="text-3xl sm:text-4xl font-black text-foreground">Doa Harian</h1>
                 <p className="text-default-500 text-sm sm:text-base max-w-lg mx-auto">

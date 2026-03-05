@@ -95,7 +95,7 @@ export default function KiblatPage() {
     const compassRotation = qibla !== null ? qibla - heading : 0;
 
     return (
-        <div className="py-6 sm:py-10 flex flex-col items-center gap-6 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-2xl mx-auto w-full px-4">
+        <div className="py-6 sm:py-10 flex flex-col items-center gap-5 sm:gap-8 animate-in fade-in slide-in-from-bottom-4 duration-1000 max-w-2xl mx-auto w-full">
             <div className="text-center space-y-2 sm:space-y-4">
                 <h1 className="text-3xl sm:text-4xl font-black text-foreground">Arah Kiblat</h1>
                 <p className="text-default-500 text-sm sm:text-base">
