@@ -1,4 +1,5 @@
 {
+    "id": "ruangibadah-pwa",
     "name": "RuangIbadah",
     "short_name": "RuangIbadah",
     "description": "Platform utilitas ibadah harian untuk Muslim modern",
@@ -19,6 +20,22 @@
             "sizes": "512x512",
             "type": "image/png",
             "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/screenshots/desktop.png",
+            "sizes": "1132x645",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "RuangIbadah - Halaman Utama (Desktop)"
+        },
+        {
+            "src": "/screenshots/mobile.png",
+            "sizes": "500x689",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "RuangIbadah - Halaman Utama (Mobile)"
         }
     ]
 }
