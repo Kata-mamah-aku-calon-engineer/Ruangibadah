@@ -24,7 +24,7 @@
 </p>
 
 <p align="center">
-  Dibuat dengan ❤️ oleh komunitas <a href="https://github.com/Kata-mamah-aku-calon-engineer"><strong>Kata-mamah-aku-calon-engineer</strong></a>
+  Dibuat oleh komunitas <a href="https://github.com/Kata-mamah-aku-calon-engineer"><strong>Kata-mamah-aku-calon-engineer</strong></a>
 </p>
 
 ---
