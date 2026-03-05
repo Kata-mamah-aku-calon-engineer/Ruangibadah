@@ -337,55 +337,146 @@ Ruangibadah/
 
 ## 🤝 Kontribusi
 
-Kami sangat terbuka untuk kontribusi! Ini adalah proyek komunitas — siapa saja boleh ikut berkontribusi.
+<p align="center">
+  <strong>Proyek ini milik komunitas — kontribusi kamu sangat berarti! 💪</strong><br />
+  <sub>Dari yang baru belajar ngoding sampai senior developer, semua welcome.</sub>
+</p>
+
+### Langkah Berkontribusi
+
+<table>
+<tr>
+<td width="60"><strong>Step</strong></td>
+<td><strong>Aksi</strong></td>
+<td><strong>Command</strong></td>
+</tr>
+<tr>
+<td align="center">1️⃣</td>
+<td><strong>Fork & Clone</strong> — Fork repo ini, lalu clone ke lokal</td>
+<td>
 
 ```bash
-# 1. Fork repository ini lalu clone
-git clone https://github.com/<username-kamu>/Ruangibadah.git
-cd Ruangibadah
-
-# 2. Buat branch fitur
-git checkout -b fitur/tambah-xyz
-
-# 3. Koding & commit
-git add .
-git commit -m "feat: menambahkan fitur xyz"
-
-# 4. Push & buat Pull Request
-git push origin fitur/tambah-xyz
+git clone https://github.com/<username>/Ruangibadah.git
+cd Ruangibadah && npm install
 ```
 
-Lalu buka **Pull Request** di GitHub. Tim kami akan review & merge! 🎉
+</td>
+</tr>
+<tr>
+<td align="center">2️⃣</td>
+<td><strong>Buat Branch</strong> — Buat branch baru untuk fitur/fix kamu</td>
+<td>
 
-### Konvensi Commit
+```bash
+git checkout -b fitur/nama-fitur-kamu
+```
 
-| Prefix | Penggunaan |
-|--------|------------|
-| `feat:` | Fitur baru |
-| `fix:` | Perbaikan bug |
-| `docs:` | Perubahan dokumentasi |
-| `style:` | Perubahan UI/styling |
-| `refactor:` | Refactoring kode |
-| `perf:` | Peningkatan performa |
+</td>
+</tr>
+<tr>
+<td align="center">3️⃣</td>
+<td><strong>Koding!</strong> — Implementasi perubahan kamu</td>
+<td>
+
+```bash
+npm run dev  # Jalankan dev server
+```
+
+</td>
+</tr>
+<tr>
+<td align="center">4️⃣</td>
+<td><strong>Commit</strong> — Commit dengan pesan yang jelas</td>
+<td>
+
+```bash
+git add .
+git commit -m "feat: menambahkan fitur xyz"
+```
+
+</td>
+</tr>
+<tr>
+<td align="center">5️⃣</td>
+<td><strong>Push & PR</strong> — Push branch dan buat Pull Request</td>
+<td>
+
+```bash
+git push origin fitur/nama-fitur-kamu
+```
+
+</td>
+</tr>
+</table>
+
+> Setelah push, buka **Pull Request** di GitHub → tim kami akan review & merge! 🎉
+
+### 📝 Konvensi Commit
+
+Kami menggunakan format [Conventional Commits](https://www.conventionalcommits.org/) agar history git rapi dan mudah dibaca:
+
+```
+<type>: <deskripsi singkat>
+
+Contoh:
+feat: menambahkan fitur hafalan tracker
+fix: memperbaiki overflow di halaman kajian
+docs: update README dengan tutorial APK
+style: perbaiki spacing di halaman quran
+refactor: ekstrak komponen PrayerCard
+perf: optimasi lazy loading gambar
+```
+
+| Emoji | Prefix | Kapan Dipakai | Contoh |
+|-------|--------|---------------|--------|
+| ✨ | `feat:` | Fitur baru | `feat: tambah mode khatam` |
+| 🐛 | `fix:` | Perbaikan bug | `fix: countdown tidak reset` |
+| 📝 | `docs:` | Dokumentasi | `docs: update API reference` |
+| 🎨 | `style:` | UI / styling | `style: responsive navbar` |
+| ♻️ | `refactor:` | Refactoring | `refactor: split utils` |
+| ⚡ | `perf:` | Performa | `perf: cache API response` |
+| 🧪 | `test:` | Testing | `test: unit test zakat` |
+| 🔧 | `chore:` | Maintenance | `chore: update dependencies` |
+
+### 💡 Ide Kontribusi
+
+Bingung mau kontribusi apa? Ini beberapa ide:
+
+- 🌙 Tambah **mode khatam** (target baca 30 hari)
+- 📊 Buat **statistik bacaan** (progress tracker)
+- 🎙️ Tambah pilihan **multi-qari** untuk audio murottal
+- 🌍 Tambah **terjemahan bahasa Inggris**
+- 🧪 Tulis **unit test** untuk kalkulator zakat
+- 📱 Buat **widget** jadwal sholat
+- 🎨 Bikin **tema warna** yang bisa dikustomisasi
 
 ---
 
 ## 👥 Tim & Komunitas
 
 <p align="center">
+  <img src="https://img.shields.io/badge/Made_with-❤️_di_Indonesia-FF0000?style=for-the-badge" /><br /><br />
   <strong>Kata-mamah-aku-calon-engineer</strong><br />
-  <em>Komunitas developer muda Indonesia yang belajar ngoding sambil bikin sesuatu yang bermanfaat untuk umat.</em>
+  <em>Komunitas developer muda Indonesia yang belajar ngoding<br />sambil bikin sesuatu yang bermanfaat untuk umat.</em>
 </p>
 
 <p align="center">
   <a href="https://github.com/Kata-mamah-aku-calon-engineer">
-    <img src="https://img.shields.io/badge/GitHub-Kata--mamah--aku--calon--engineer-181717?style=for-the-badge&logo=github" />
+    <img src="https://img.shields.io/badge/GitHub-Organization-181717?style=for-the-badge&logo=github" />
   </a>
   &nbsp;
   <a href="https://ruangibadah-id.vercel.app">
-    <img src="https://img.shields.io/badge/Website-RuangIbadah-00C853?style=for-the-badge&logo=vercel&logoColor=white" />
+    <img src="https://img.shields.io/badge/🌐_Website-Live_Demo-00C853?style=for-the-badge" />
   </a>
 </p>
+
+### 🌟 Contributors
+
+<a href="https://github.com/Kata-mamah-aku-calon-engineer/Ruangibadah/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Kata-mamah-aku-calon-engineer/Ruangibadah" />
+</a>
+
+<sub>Dibuat otomatis dengan [contrib.rocks](https://contrib.rocks)</sub>
 
 ---
 
