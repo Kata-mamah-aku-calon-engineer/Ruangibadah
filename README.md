@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Platform utilitas ibadah harian untuk Muslim modern.</strong><br />
-  Dibangun dengan ❤️ oleh komunitas <a href="https://github.com/Kata-mamah-aku-calon-engineer">Kata-mamah-aku-calon-engineer</a>
+  Dibuat oleh komunitas <a href="https://github.com/Kata-mamah-aku-calon-engineer">Kata-mamah-aku-calon-engineer</a>
 </p>
 
 <p align="center">
@@ -31,17 +31,22 @@ Proyek ini merupakan karya open-source dari komunitas **Kata-mamah-aku-calon-eng
 
 | # | Fitur | Deskripsi |
 |---|-------|-----------|
-| 1 | **Al-Qur'an Digital** | 114 surat lengkap dengan teks Arab, latin, terjemahan Indonesia, dan audio murottal. Bookmark & lanjut baca. |
+| 1 | **Al-Qur'an Digital** | 114 surat lengkap dengan teks Arab, latin, terjemahan Indonesia, audio murottal streaming, bookmark, dan swipe navigasi antar surah. |
 | 2 | **Kitab Hadits** | 38.000+ hadits dari 9 kitab utama (Bukhari, Muslim, Abu Daud, Tirmidzi, Nasai, Ibnu Majah, Ahmad, Malik, Darimi). Navigasi per halaman & pencarian nomor hadits. |
-| 3 | **Jadwal Sholat** | Waktu sholat akurat berdasarkan lokasi (API Aladhan, metode Kemenag RI). Hitung mundur menuju waktu sholat berikutnya. |
+| 3 | **Jadwal Sholat** | Waktu sholat akurat berdasarkan lokasi (API Aladhan, metode Kemenag RI). Hitung mundur menuju waktu sholat berikutnya + notifikasi push. |
 | 4 | **Jam Digital Real-time** | Jam interaktif yang berdetak per detik, tampil di halaman utama bersama tanggal Hijriah & Masehi. |
 | 5 | **Kompas Kiblat** | Arah kiblat real-time menggunakan DeviceOrientation API (sensor gyroscope & magnetometer HP). Support iOS 13+. |
 | 6 | **Tasbih Digital** | Alat hitung dzikir interaktif dengan target 33/99/1000. Haptic feedback (HP bergetar setiap hitungan). |
 | 7 | **Kumpulan Doa** | 108 doa harian dari Al-Qur'an & Hadits lengkap dengan teks Arab, latin, dan terjemahan. Live search. |
 | 8 | **Kalkulator Zakat** | 4 jenis zakat: Penghasilan, Emas/Perak, Tabungan, Fitrah. Cek nisab otomatis. |
-| 9 | **Peta Masjid Terdekat** | Peta interaktif (Leaflet.js + OpenStreetMap) untuk menemukan masjid di sekitar. Radius 1-10 km. Link petunjuk arah Google Maps. |
-| 10 | **Artikel & Kajian** | Artikel islami terbaru otomatis dari sumber terpercaya Indonesia: muslim.or.id, rumaysho.com, konsultasisyariah.com. Diperbarui setiap jam. |
-| 11 | **PWA Support** | Bisa di-install langsung ke layar HP seperti aplikasi native. Offline support dengan Service Worker. |
+| 9 | **Peta Masjid Terdekat** | Peta interaktif (Leaflet.js + OpenStreetMap) untuk menemukan masjid di sekitar. Radius 1-10 km. |
+| 10 | **Artikel & Kajian** | Artikel islami terbaru otomatis dari sumber terpercaya Indonesia: muslim.or.id, rumaysho.com, konsultasisyariah.com. |
+| 11 | **Dark/Light Mode** | Toggle tema gelap/terang dengan ikon Sun/Moon di navbar. Mengikuti preferensi sistem secara default. |
+| 12 | **Notifikasi Sholat** | Push Notification untuk pengingat waktu sholat. Menggunakan Notification API browser. |
+| 13 | **Audio Murottal** | Streaming audio murottal dari Misyari Rasyid Al-Afasi, tersedia di setiap halaman surah. |
+| 14 | **Halaman Profil** | Halaman profil pengguna dengan info akun, terakhir dibaca, dan opsi logout. |
+| 15 | **Multi-bahasa** | Dukungan tiga bahasa: Indonesia 🇮🇩, English 🇬🇧, dan العربية 🇸🇦. Toggle via flag selector. |
+| 16 | **PWA Support** | Bisa di-install langsung ke layar HP seperti aplikasi native. Offline support dengan Service Worker. |
 
 ---
 
@@ -57,6 +62,7 @@ Proyek ini merupakan karya open-source dari komunitas **Kata-mamah-aku-calon-eng
 | **Ikon** | [Lucide React](https://lucide.dev/) |
 | **Auth & DB** | [Supabase](https://supabase.com/) (Google OAuth + PostgreSQL) |
 | **Peta** | [Leaflet.js](https://leafletjs.com/) + [OpenStreetMap](https://www.openstreetmap.org/) |
+| **Tema** | [next-themes](https://github.com/pacocoursey/next-themes) |
 | **PWA** | Custom Service Worker + Web App Manifest |
 
 ---
@@ -70,36 +76,8 @@ Proyek ini merupakan karya open-source dari komunitas **Kata-mamah-aku-calon-eng
 | Doa Harian | [api.myquran.com](https://api.myquran.com/) | JSON (Offline) |
 | Jadwal Sholat | [Aladhan API](https://aladhan.com/prayer-times-api) | REST API |
 | Arah Kiblat | [Aladhan API](https://aladhan.com/prayer-times-api) | REST API |
-| Masjid Terdekat | [Overpass API](https://overpass-api.de/) (OpenStreetMap) | REST API (Fallback) |
+| Masjid Terdekat | [Overpass API](https://overpass-api.de/) (OpenStreetMap) | REST API |
 | Artikel Kajian | muslim.or.id, rumaysho.com, konsultasisyariah.com | RSS Feed |
-
----
-
-## 🗃️ Database Schema (Supabase)
-
-```sql
--- Profil pengguna
-CREATE TABLE user_profiles (
-  id UUID PRIMARY KEY REFERENCES auth.users(id),
-  display_name TEXT,
-  avatar_url TEXT,
-  created_at TIMESTAMPTZ DEFAULT NOW()
-);
-
--- Bookmark Al-Qur'an
-CREATE TABLE bookmarks (
-  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id UUID REFERENCES auth.users(id) NOT NULL,
-  surah_number INT NOT NULL,
-  ayah_number INT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT NOW(),
-  UNIQUE(user_id, surah_number, ayah_number)
-);
-
--- Row Level Security
-ALTER TABLE user_profiles ENABLE ROW LEVEL SECURITY;
-ALTER TABLE bookmarks ENABLE ROW LEVEL SECURITY;
-```
 
 ---
 
@@ -158,13 +136,6 @@ RuangIbadah bisa di-install langsung ke HP tanpa melalui Play Store:
 2. Klik menu ⋮ → **"Tambahkan ke Layar Utama"**
 3. Aplikasi akan muncul di app drawer seperti aplikasi native!
 
-### Ingin file .apk?
-
-1. Deploy ke Vercel/Netlify terlebih dahulu
-2. Buka [PWABuilder.com](https://www.pwabuilder.com/)
-3. Masukkan URL deployment
-4. Download file `.apk` yang dihasilkan
-
 ---
 
 ## 📁 Struktur Proyek
@@ -172,36 +143,37 @@ RuangIbadah bisa di-install langsung ke HP tanpa melalui Play Store:
 ```
 Ruangibadah/
 ├── public/
-│   ├── icons/            # PWA icons (192x192 & 512x512)
+│   ├── icons/            # PWA icons
 │   ├── manifest.json     # Web App Manifest
-│   └── sw.js             # Service Worker
+│   └── sw.js             # Service Worker (offline + push)
 ├── src/
 │   ├── app/
 │   │   ├── page.tsx          # Beranda + Quick Actions
-│   │   ├── quran/            # Al-Qur'an digital
+│   │   ├── quran/            # Al-Qur'an (swipe navigation)
 │   │   ├── hadith/           # Kitab Hadits (9 kitab)
-│   │   ├── jadwal-sholat/    # Jadwal sholat
+│   │   ├── jadwal-sholat/    # Jadwal sholat + notifikasi
 │   │   ├── kiblat/           # Kompas kiblat
 │   │   ├── tasbih/           # Tasbih digital
-│   │   ├── doa/              # Kumpulan doa
+│   │   ├── doa/              # Kumpulan doa (108)
 │   │   ├── zakat/            # Kalkulator zakat
 │   │   ├── masjid/           # Masjid terdekat
-│   │   └── kajian/           # Artikel & info kajian
+│   │   ├── kajian/           # Artikel & info kajian
+│   │   └── profil/           # Halaman profil pengguna
 │   ├── components/
-│   │   ├── navbar.tsx        # Navigasi responsif
-│   │   ├── footer.tsx        # Footer
-│   │   ├── PrayerCountdown.tsx  # Hitung mundur sholat + jam
-│   │   ├── AuthButtons.tsx   # Login/logout Google
-│   │   ├── MasjidMap.tsx     # Komponen peta Leaflet
-│   │   └── ServiceWorkerRegister.tsx
+│   │   ├── navbar.tsx        # Navigasi (dropdown + dark mode)
+│   │   ├── footer.tsx        # Footer (kredit komunitas)
+│   │   ├── PrayerCountdown.tsx  # Countdown + jam
+│   │   ├── PushNotification.tsx # Notifikasi sholat
+│   │   ├── SwipeNavigator.tsx   # Swipe gesture Qur'an
+│   │   ├── AudioPlayer.tsx   # Murottal player
+│   │   └── BookmarkButton.tsx
 │   ├── data/
 │   │   └── doa.json          # 108 doa (offline-ready)
 │   └── utils/
-│       └── supabase/         # Supabase client & server helpers
-├── schema.sql                # Database schema
-├── .env.local                # Environment variables (JANGAN di-commit!)
-├── package.json
-├── tsconfig.json
+│       ├── i18n.tsx          # Multi-bahasa (ID/EN/AR)
+│       └── supabase/         # Supabase helpers
+├── schema.sql
+├── .env.local
 └── README.md
 ```
 
@@ -219,13 +191,14 @@ Ruangibadah/
 - [x] Kitab hadits (38.000+ dari 9 kitab)
 - [x] Artikel & kajian (RSS feed otomatis)
 - [x] Jam digital real-time
-- [x] PWA support (installable)
+- [x] PWA support (installable + offline)
 - [x] Login Google (Supabase Auth)
-- [ ] Dark/Light mode toggle
-- [ ] Notifikasi waktu sholat (Push Notification)
-- [ ] Audio murottal streaming
-- [ ] Halaman profil pengguna
-- [ ] Multi-bahasa (EN/AR)
+- [x] Dark/Light mode toggle
+- [x] Notifikasi waktu sholat (Push Notification)
+- [x] Audio murottal streaming
+- [x] Halaman profil pengguna
+- [x] Multi-bahasa (ID/EN/AR)
+- [x] Swipe navigasi antar surah
 
 ---
 
