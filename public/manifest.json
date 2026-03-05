@@ -2,12 +2,28 @@
     "id": "ruangibadah-pwa",
     "name": "RuangIbadah",
     "short_name": "RuangIbadah",
-    "description": "Platform utilitas ibadah harian untuk Muslim modern",
+    "description": "Platform utilitas ibadah harian untuk Muslim modern. Al-Qur'an, Hadits, Jadwal Sholat, Kiblat, Tasbih, Doa, Zakat, dan lainnya.",
     "start_url": "/",
+    "scope": "/",
     "display": "standalone",
+    "display_override": [
+        "standalone",
+        "minimal-ui"
+    ],
     "background_color": "#0a0a0a",
     "theme_color": "#006FEE",
     "orientation": "portrait-primary",
+    "lang": "id",
+    "dir": "ltr",
+    "categories": [
+        "lifestyle",
+        "education",
+        "religion"
+    ],
+    "prefer_related_applications": false,
+    "launch_handler": {
+        "client_mode": "navigate-existing"
+    },
     "icons": [
         {
             "src": "/icons/icon-192.png",
@@ -36,6 +52,52 @@
             "type": "image/png",
             "form_factor": "narrow",
             "label": "RuangIbadah - Halaman Utama (Mobile)"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Al-Qur'an",
+            "short_name": "Qur'an",
+            "url": "/quran",
+            "icons": [
+                {
+                    "src": "/icons/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Jadwal Sholat",
+            "short_name": "Sholat",
+            "url": "/jadwal-sholat",
+            "icons": [
+                {
+                    "src": "/icons/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Arah Kiblat",
+            "short_name": "Kiblat",
+            "url": "/kiblat",
+            "icons": [
+                {
+                    "src": "/icons/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
+        },
+        {
+            "name": "Tasbih Digital",
+            "short_name": "Tasbih",
+            "url": "/tasbih",
+            "icons": [
+                {
+                    "src": "/icons/icon-192.png",
+                    "sizes": "192x192"
+                }
+            ]
         }
     ]
 }
