@@ -106,8 +106,8 @@ export function PrayerCountdown() {
                 </p>
             </div>
 
-            <div className="mt-8 relative bg-gradient-to-r from-primary to-teal-500 p-8 rounded-3xl w-full max-w-4xl text-white shadow-xl shadow-primary/20 overflow-hidden">
-                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-20"></div>
+            <div className="mt-8 relative bg-gradient-to-br from-slate-900 to-slate-800 p-8 rounded-3xl w-full max-w-4xl text-white shadow-xl overflow-hidden">
+                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/arabesque.png')] opacity-10"></div>
                 <div className="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div className="text-left">
                         <p className="text-white/80 font-medium tracking-wider uppercase text-sm">
