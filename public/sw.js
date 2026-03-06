@@ -1,45 +1,70 @@
-// PWABuilder-compatible Service Worker
-importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
+const cacheName = "ruangibadah-offline-v1";
+const appShellFiles = [
+    "/",
+    "/offline.html",
+    "/manifest.json",
+    "/icons/icon-192.png",
+    "/icons/icon-512.png"
+];
 
-const CACHE = "pwabuilder-page";
-const offlineFallbackPage = "offline.html";
-
-self.addEventListener("message", (event) => {
-    if (event.data && event.data.type === "SKIP_WAITING") {
-        self.skipWaiting();
-    }
-});
-
-self.addEventListener('install', async (event) => {
-    event.waitUntil(
-        caches.open(CACHE)
-            .then((cache) => cache.add(offlineFallbackPage))
+self.addEventListener("install", (e) => {
+    console.log("[Service Worker] Install");
+    e.waitUntil(
+        (async () => {
+            const cache = await caches.open(cacheName);
+            console.log("[Service Worker] Caching all: app shell and content");
+            await cache.addAll(appShellFiles);
+        })()
     );
+    self.skipWaiting();
 });
 
-if (workbox.navigationPreload.isSupported()) {
-    workbox.navigationPreload.enable();
-}
+self.addEventListener("activate", (e) => {
+    e.waitUntil(
+        caches.keys().then((keyList) =>
+            Promise.all(
+                keyList.map((key) => {
+                    if (key === cacheName) {
+                        return undefined;
+                    }
+                    return caches.delete(key);
+                })
+            )
+        )
+    );
+    self.clients.claim();
+});
 
-self.addEventListener('fetch', (event) => {
-    if (event.request.mode === 'navigate') {
-        event.respondWith((async () => {
-            try {
-                const preloadResp = await event.preloadResponse;
-
-                if (preloadResp) {
-                    return preloadResp;
-                }
-
-                const networkResp = await fetch(event.request);
-                return networkResp;
-            } catch (error) {
-                const cache = await caches.open(CACHE);
-                const cachedResp = await cache.match(offlineFallbackPage);
-                return cachedResp;
-            }
-        })());
+self.addEventListener("fetch", (e) => {
+    // Only cache GET and HTTP requests
+    if (e.request.method !== "GET" || !e.request.url.startsWith("http")) {
+        return;
     }
+
+    e.respondWith(
+        (async () => {
+            const r = await caches.match(e.request);
+            console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
+            if (r) {
+                return r;
+            }
+
+            try {
+                const response = await fetch(e.request);
+                const cache = await caches.open(cacheName);
+                console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
+                cache.put(e.request, response.clone());
+                return response;
+            } catch (error) {
+                // Offline fallback for navigation
+                if (e.request.mode === "navigate") {
+                    const cache = await caches.open(cacheName);
+                    return await cache.match("/offline.html");
+                }
+                throw error;
+            }
+        })()
+    );
 });
 
 // Push notification handler
@@ -78,8 +103,7 @@ self.addEventListener("notificationclick", (event) => {
 
     event.waitUntil(
         self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
-            for (let i = 0; i < clients.length; i++) {
-                const client = clients[i];
+            for (const client of clients) {
                 if (client.url && "focus" in client) {
                     return client.focus();
                 }
