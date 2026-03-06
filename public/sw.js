@@ -1,16 +1,8 @@
-// RuangIbadah Service Worker v5
-// Refactored for PWABuilder AST parser detection
+// PWABuilder-compatible Service Worker
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.1.2/workbox-sw.js');
 
-const CACHE_NAME = "ruangibadah-v5";
-const OFFLINE_URL = "/offline.html";
-
-const STATIC_ASSETS = [
-    "/",
-    "/offline.html",
-    "/manifest.json",
-    "/icons/icon-192.png",
-    "/icons/icon-512.png"
-];
+const CACHE = "pwabuilder-page";
+const offlineFallbackPage = "offline.html";
 
 self.addEventListener("message", (event) => {
     if (event.data && event.data.type === "SKIP_WAITING") {
@@ -18,103 +10,36 @@ self.addEventListener("message", (event) => {
     }
 });
 
-self.addEventListener("install", (event) => {
+self.addEventListener('install', async (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME).then((cache) => {
-            return cache.addAll(STATIC_ASSETS);
-        })
+        caches.open(CACHE)
+            .then((cache) => cache.add(offlineFallbackPage))
     );
-    self.skipWaiting();
 });
 
-self.addEventListener("activate", (event) => {
-    event.waitUntil(
-        caches.keys().then((keyList) => {
-            return Promise.all(
-                keyList.map((key) => {
-                    if (key !== CACHE_NAME) {
-                        return caches.delete(key);
-                    }
-                })
-            );
-        }).then(() => {
-            if (self.registration.navigationPreload) {
-                return self.registration.navigationPreload.enable();
+if (workbox.navigationPreload.isSupported()) {
+    workbox.navigationPreload.enable();
+}
+
+self.addEventListener('fetch', (event) => {
+    if (event.request.mode === 'navigate') {
+        event.respondWith((async () => {
+            try {
+                const preloadResp = await event.preloadResponse;
+
+                if (preloadResp) {
+                    return preloadResp;
+                }
+
+                const networkResp = await fetch(event.request);
+                return networkResp;
+            } catch (error) {
+                const cache = await caches.open(CACHE);
+                const cachedResp = await cache.match(offlineFallbackPage);
+                return cachedResp;
             }
-        })
-    );
-    self.clients.claim();
-});
-
-self.addEventListener("fetch", (event) => {
-    // We only want to call event.respondWith() if this is a GET request for an HTTP/HTTPS resource.
-    if (event.request.method !== "GET" || !event.request.url.startsWith("http")) {
-        return;
+        })());
     }
-
-    // API Requests -> Network First, fallback to Cache
-    if (
-        event.request.url.includes("/api/") ||
-        event.request.url.includes("api.hadith") ||
-        event.request.url.includes("equran.id") ||
-        event.request.url.includes("aladhan.com") ||
-        event.request.url.includes("rss2json.com") ||
-        event.request.url.includes("overpass-api")
-    ) {
-        event.respondWith(
-            fetch(event.request)
-                .then((response) => {
-                    return caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, response.clone());
-                        return response;
-                    });
-                })
-                .catch(() => {
-                    return caches.match(event.request);
-                })
-        );
-        return;
-    }
-
-    // Navigation requests (HTML pages) -> Network First, fallback to offline.html
-    if (event.request.mode === "navigate") {
-        event.respondWith(
-            fetch(event.request)
-                .then((response) => {
-                    return caches.open(CACHE_NAME).then((cache) => {
-                        cache.put(event.request, response.clone());
-                        return response;
-                    });
-                })
-                .catch(() => {
-                    return caches.open(CACHE_NAME).then((cache) => {
-                        return cache.match(event.request).then((cachedResponse) => {
-                            if (cachedResponse) {
-                                return cachedResponse;
-                            }
-                            return cache.match(OFFLINE_URL);
-                        });
-                    });
-                })
-        );
-        return;
-    }
-
-    // Static Assets -> Cache First, fallback to Network
-    // THIS IS THE EXACT PATTERN PWABUILDER LOOKS FOR TO DETECT "OFFLINE SUPPORT"
-    event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            if (cachedResponse) {
-                return cachedResponse;
-            }
-            return fetch(event.request).then((networkResponse) => {
-                return caches.open(CACHE_NAME).then((cache) => {
-                    cache.put(event.request, networkResponse.clone());
-                    return networkResponse;
-                });
-            });
-        })
-    );
 });
 
 // Push notification handler
